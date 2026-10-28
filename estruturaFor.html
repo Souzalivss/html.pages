@@ -1,26 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Série de Fibonacci</title>
 </head>
 
 <body>
-<h1>Série de Fibonacci</h1>
-<form>
-    <label>Valor de X</label>
-    <input type="number" id="v1">
-    <a href="#" onclick="executar()">Executar</a>
-</form>
-<div id="resp">O resultado aparece aqui</div>
-<script src="ROT_MOD2-NC4.js"></script>
-<script>
-    const executar = () => {
-        const x = eval(document.getElementById("v1").value);
-        let serie = "", i=0;
-        while(i<=x){serie += fibonacci(i) + ""; i++;}
-        document.getElementById("resp").innerHTML = `resultado:${serie}`;
-    }
-</script>
+
+    <h1>Série de Fibonacci</h1>
+
+    <form onsubmit="return false;">
+        <label for="v1">Valor de X:</label>
+        <input type="number" id="v1" min="0">
+        <button type="button" onclick="executar()">
+            Executar
+        </button>
+    </form>
+
+    <div id="resp">O resultado aparece aqui</div>
+
+    <script>
+        // Função para calcular Fibonacci
+        function fibonacci(n) {
+            if (n <= 1) {
+                return n;
+            }
+
+            let a = 0;
+            let b = 1;
+
+            for (let i = 2; i <= n; i++) {
+                let temp = a + b;
+                a = b;
+                b = temp;
+            }
+
+            return b;
+        }
+
+        // Função executada ao clicar no botão
+        function executar() {
+            const x = Number(document.getElementById("v1").value);
+
+            let serie = "";
+
+            for (let i = 0; i <= x; i++) {
+                serie += fibonacci(i);
+
+                if (i < x) {
+                    serie += " - ";
+                }
+            }
+
+            document.getElementById("resp").innerHTML =
+                `<strong>Resultado:</strong> ${serie}`;
+        }
+    </script>
+
 </body>
 </html>
